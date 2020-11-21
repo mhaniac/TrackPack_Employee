@@ -1,0 +1,27 @@
+<div class="d-flex flex-column justify-content-around h-100">
+    <div class="name w-100 p-2 text-center">
+        <p class="h3 w-100">Bienvenido</p>
+        <p class="lead text-break">{{ user.name }} {{ user.lastName }}</p>
+        <hr>
+    </div>
+    <ul class="nav nav-pills flex-column text-center">
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/dashboard']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Dashboard <i class="fas fa-tachometer-alt ml-1"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/dashboard/load']" routerLinkActive="active">Cargas <i class="fas fa-box-open ml-1"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/dashboard/register']" routerLinkActive="active">Registro <i class="fas fa-user-plus ml-1"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/dashboard/reports']" routerLinkActive="active">Reportes <i class="fas fa-file-pdf ml-1"></i></a>
+        </li>
+    </ul>
+    <div class="option w-100 text-center">
+        <a (click)="logout()" class="btn btn-primary">Cerrar sesion</a>
+    </div>
+    <div class="footer text-center">
+        <p class="font-weight-light">Trackpack &copy; Todos los derechos reservados</p>
+    </div>
+</div>

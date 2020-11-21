@@ -1,0 +1,8 @@
+.icon-overlay {
+    position: absolute;
+    right: 0;
+    bottom: -10%;
+    font-size: 120px;
+    opacity: .2;
+    z-index: 0;
+}
