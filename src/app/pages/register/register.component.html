@@ -1,1 +1,96 @@
-<p>register works!</p>
+<div class="container">
+    <div class="row my-3">
+        <div class="col-12 text-center">
+            <p class="display-4">Gestión de empleados</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 mx-auto my-2">
+            <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#staticBackdrop">Agregar nuevo empleado <i class="fas fa-plus"></i></button>
+        </div>
+        <div class="col-12">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let employee of employees">
+                        <th scope="row">{{employee.idEmpleado}}</th>
+                        <td>{{employee.userLogin}}</td>
+                        <td>{{employee.nombre}}</td>
+                        <td>{{employee.apellido}}</td>
+                        <td>
+                            <div class="options w-100 text-center">
+                                <button class="btn btn-danger" data-toggle="tooltip" data-placement="top" data-original-title="Tooltip on top" (click)="deleteEmployee(employee.idEmpleado, employee.userLogin)"><i class="fas fa-trash-alt"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal-register -->
+
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Registrar empleado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="resetForm()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <app-alert *ngIf="employeeService.getError().show" type="alert-danger" [message]="employeeService.getError().message"></app-alert>
+                <form [formGroup]="formModal" (submit)="onSubmit()" autocomplete="off">
+                    <div class="form-group">
+                        <label for="usuario" class="col-form-label d-block">Usuario</label>
+                        <small class="d-block text-danger" *ngIf="invalidUsernameLength">El nombre de usuario debe contener al menos 5 caracteres</small>
+                        <small class="d-block text-danger" *ngIf="invalidUsernamePattern">El nombre de usuario solo puede contener letras o digitos</small>
+                        <small class="d-block text-danger" *ngIf="invalidUsernameRequired">El nombre de usuario es obligatorio</small>
+                        <input type="text" class="form-control" id="usuario" [formControlName]="'userLogin'" [class.is-invalid]="invalidUsername" maxlength="20">
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre" class="col-form-label">Nombre</label>
+                        <small class="d-block text-danger" *ngIf="invalidNameLength">El nombre debe contener al menos 2 caracteres</small>
+                        <small class="d-block text-danger" *ngIf="invalidNamePattern">El nombre solo puede contener letras</small>
+                        <small class="d-block text-danger" *ngIf="invalidNameRequired">El nombre es obligatorio</small>
+                        <small class="d-block text-danger" *ngIf="invalidNameRepeat">El nombre no puede contener 3 caracteres consecutivos del mismo tipo</small>
+                        <input type="text" class="form-control" id="nombre" [formControlName]="'nombre'" [class.is-invalid]="invalidName" maxlength="50">
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido" class="col-form-label">Apellido</label>
+                        <label for="nombre" class="col-form-label">Nombre</label>
+                        <small class="d-block text-danger" *ngIf="invalidLastLength">El apellido debe contener al menos 2 caracteres</small>
+                        <small class="d-block text-danger" *ngIf="invalidLastPattern">El apellido solo puede contener letras</small>
+                        <small class="d-block text-danger" *ngIf="invalidLastRequired">El apellido es obligatorio</small>
+                        <small class="d-block text-danger" *ngIf="invalidLastRepeat">El apellido no puede contener 3 caracteres consecutivos del mismo tipo</small>
+                        <input type="text" class="form-control" id="apellido" [formControlName]="'apellido'" [class.is-invalid]="invalidLast" maxlength="50">
+                    </div>
+                    <div class="form-group">
+                        <label for="passwd" class="col-form-label">Contraseña</label>
+                        <small class="d-block text-danger" *ngIf="equalPasswd">Las contraseñas no coinciden</small>
+                        <input type="password" class="form-control" id="passwd" [formControlName]="'passwd'" maxlength="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="passwd2" class="col-form-label">Repertir contraseña</label>
+                        <input type="password" class="form-control" id="passwd2" [formControlName]="'passwd2'" maxlength="100">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" [disabled]="formModal.invalid || equalPasswd">Registrar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" #cancel (click)="resetForm()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

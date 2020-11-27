@@ -1,0 +1,150 @@
+<div class="container">
+  <div class="row my-3">
+    <div class="col-12 text-center">
+      <p class="display-4" *ngIf="!showInactive">Gestión de clientes activos</p>
+      <p class="display-4" *ngIf="showInactive">Gestión de clientes inactivos</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6 mx-auto my-2">
+      <button
+        class="btn btn-primary btn-block"
+        (click)="showIncativeCustomers()"
+        *ngIf="!showInactive"
+      >
+        Mostrar usuarios inactivos <i class="ml-2 fas fa-eye"></i>
+      </button>
+      <button
+        class="btn btn-primary btn-block"
+        (click)="getCustomers()"
+        *ngIf="showInactive"
+      >
+        Mostrar usuarios activos <i class="ml-2 fas fa-eye-slash"></i>
+      </button>
+    </div>
+    <div class="col-12">
+        <app-alert type="alert-warning" message="No hay clientes en esta seccion" *ngIf="customers.length===0"></app-alert>
+      <table class="table table-hover" *ngIf="customers.length>0">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Fecha de Registro</th>
+            <th scope="col">Ultima Actividad</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let customer of customers">
+            <td>{{ customer.nombre }}</td>
+            <td>{{ customer.apellido }}</td>
+            <td>{{ customer.email }}</td>
+            <td>{{ customer.fechaRegistro | date }}</td>
+            <td>{{ customer.ultimoInicio | date }}</td>
+            <td>
+              <div class="options w-100 text-center">
+                <button
+                  class="btn btn-info mx-1"
+                  (click)="reactiveCustomer(customer.idCliente, customer.nombre)"
+                  tooltip="Reactivar cuenta"
+                  placement="top"
+                  *ngIf="showInactive"
+                >
+                <i class="fas fa-undo"></i>
+                </button>
+                <button
+                  class="btn btn-danger mx-1"
+                  (click)="deleteCustomer(customer.idCliente, customer.nombre)"
+                  tooltip="Eliminar"
+                  placement="top"
+                  *ngIf="!showInactive"
+                >
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+                <button
+                  class="btn btn-warning mx-1"
+                  (click)="updatePassword(customer.idCliente, customer.nombre)"
+                  tooltip="Cambiar contraseña"
+                  placement="top"
+                  data-toggle="modal"
+                  data-target="#modal"
+                  *ngIf="!showInactive"
+                >
+                  <i class="fas fa-exchange-alt"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="modal"
+  data-backdrop="static"
+  data-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cambio de contraseña</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="resetForm()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-alert  [message] = "customerService.getError().message" *ngIf="customerService.getError().show"></app-alert>
+        <form [formGroup]="formModal" (submit)="onSubmit()">
+          <div class="form-group">
+            <fieldset>
+              <label class="control-label d-block" for="passwd">Contraseña</label>
+              <small class="text-danger d-block" *ngIf="equalPasswd">Las contraseñas no coinciden</small>
+              <small class="text-danger d-block" *ngIf="requiredPasswd">La contraseña es obligatoria</small>
+              <small class="text-danger d-block" *ngIf="minPasswd">La contraseña debe contener al menos 8 caracteres</small>
+              <input
+                class="form-control"
+                id="passwd"
+                type="password"
+                [formControlName]="'passwd'"
+              />
+            </fieldset>
+          </div>
+          <div class="form-group">
+            <fieldset>
+              <label class="control-label" for="passwd2">Repetir contraseña</label>
+              <small class="text-danger d-block" *ngIf="requiredPasswd2">La contraseña es obligatoria</small>
+              <small class="text-danger d-block" *ngIf="minPasswd2">La contraseña debe contener al menos 8 caracteres</small>
+              <input
+                class="form-control"
+                id="passwd2"
+                type="password"
+                [formControlName]="'passwd2'"
+              />
+            </fieldset>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" [disabled]="formModal.invalid || equalPasswd">
+              Cambiar contraseña
+            </button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" #cancel (click)="resetForm()">
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

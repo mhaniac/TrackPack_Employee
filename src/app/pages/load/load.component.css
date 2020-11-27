@@ -1,0 +1,12 @@
+i {
+    font-size: 72px;
+}
+
+.card {
+    transition: all ease .3s;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+}

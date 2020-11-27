@@ -1,16 +1,17 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { URL } from './globals';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  private URL = 'http://localhost:3300';
+  
   public error = { show: false, message: "" };
   constructor(private http: HttpClient) { }
 
   login(user:any){
-    return this.http.post(`${this.URL}/login/employee`, user);
+    return this.http.post(`${URL}/login/employee`, user);
   }
 
   setError(error: string){
@@ -38,6 +39,6 @@ export class LoginService {
     const headers = new HttpHeaders({
       token: this.getToken()
     })
-    return this.http.get(`${this.URL}/auth/verify`, { headers });
+    return this.http.get(`${URL}/auth/verify`, { headers });
   }
 }

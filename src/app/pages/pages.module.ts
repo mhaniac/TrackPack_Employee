@@ -9,15 +9,22 @@ import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from '../components/components.module';
 import { RegisterComponent } from './register/register.component';
 import { ReportsComponent } from './reports/reports.component';
+import { RegisterTrackingComponent } from './register-tracking/register-tracking.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CustomerComponent } from './customer/customer.component';
+import { TooltipModule } from 'ng2-tooltip-directive';
 
 
 @NgModule({
-  declarations: [PagesComponent, DashboardComponent, LoadComponent, RegisterComponent, ReportsComponent],
+  declarations: [PagesComponent, DashboardComponent, LoadComponent, RegisterComponent, ReportsComponent, RegisterTrackingComponent, CustomerComponent],
   imports: [
-    CommonModule,
+    CommonModule, 
     PagesRoutingModule,
-    SharedModule,
-    ComponentsModule 
+    SharedModule, 
+    ComponentsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TooltipModule
   ],
   exports: [
     PagesComponent,

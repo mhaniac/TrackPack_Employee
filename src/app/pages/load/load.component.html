@@ -1,1 +1,46 @@
-<p>load works!</p>
+<div class="container animate__animated animate__fadeIn">
+    <div class="row">
+        <div class="col-12">
+            <div class="jumbotron">
+                <h1 class="display-3">¿Como desea registrar la carga?</h1>
+                <p class="lead">Consejo: seleccione la opción que considere más conveniente, si en la carga observa un numero de casillero lo mejor sería registrarla mediante número de casillero de lo contrario, registrarla por el numero de tracking.</p>
+                <hr class="mt-4">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <div class="card border-primary mb-3 mx-auto shadow" style="max-width: 20rem;" [routerLink]="['/dashboard/register-tracking']">
+                <div class="card-body">
+                    <h4 class="card-title">Registrar por tracking</h4>
+                    <p class="card-text text-justify">Se ingresara el numero de tracking de la carga recibida para notificarle al usuario que su paquete ya esta en el almacen.</p>
+                    <div class="icon w-100 text-right">
+                        <i class="fas fa-file-contract text-primary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card border-primary mb-3 mx-auto shadow" style="max-width: 20rem;">
+                <div class="card-body">
+                    <h4 class="card-title">Reportar ubicacion de la carga</h4>
+                    <p class="card-text text-justify">Reporta que has recibido la carga en una sede.</p>
+                    <div class="icon w-100 text-right">
+                        <i class="fas fa-map-marked-alt text-primary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card border-primary mb-3 mx-auto shadow" style="max-width: 20rem;">
+                <div class="card-body">
+                    <h4 class="card-title">Registrar por casillero</h4>
+                    <p class="card-text text-justify">El numero de casillero del usuario servira como identificativo de que el paquete le pertenece.</p>
+                    <div class="icon w-100 text-right">
+                        <i class="fas fa-cube text-primary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

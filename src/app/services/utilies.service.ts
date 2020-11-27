@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { URL } from './globals';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtiliesService {
   private attempts = 0;
-  private URL = 'http://localhost:3300';
 
   constructor(private http: HttpClient) { }
 
@@ -23,7 +23,7 @@ export class UtiliesService {
             }
             userName += last[i];
           }
-          this.http.get(`${this.URL}/employee/validUsername?userName=${userName}`).subscribe((res:any) => {
+          this.http.get(`${URL}/employee/validUsername?userName=${userName}`).subscribe((res:any) => {
             resolve(userName);
           }, (err:any) => {
             reject('Servicio no disponible');

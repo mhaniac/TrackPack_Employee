@@ -1,1 +1,54 @@
-<p>reports works!</p>
+<div class="container-fluid animate__animated animate__fadeIn">
+    <div class="row vh-100 justify-content-center">
+        <div class="col-12 text-center p-2">
+            <h3 class="text-primary">Vista previa del reporte</h3>
+        </div>
+        <div class="col-6" *ngIf="data.length===0">
+            <form>
+                <div class="form-group">
+                    <select class="custom-select" (change)="getData(select.value)" #select>
+                      <option selected="" disabled>Seleccione sobre que hacer el reporte</option>
+                      <option value="customer">Clientes</option>
+                    </select>
+                  </div>
+            </form>
+        </div>
+        <div class="col-12  h-75 overflow-auto" *ngIf="data.length>0">
+            <div id="export">
+                <div class="row">
+                    <div class="col-6 text-center d-flex flex-column justify-content-center align-items-center">
+                        <p class="h1">TrackPack</p>
+                    </div>
+                    <div class="col-6 d-flex flex-column align-items-center justify-content-center">
+                        <small class="d-block">Fecha: <strong>{{dataHeader.date | date}}</strong></small>
+                        <small class="d-block">Generado por: <strong>{{dataHeader.name}} {{dataHeader.last}}</strong></small>
+                        <small class="d-block">Tipo de reporte: <strong>{{dataHeader.type}}</strong></small>
+                    </div>
+
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Apellido</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Fecha Registro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-light" *ngFor="let d of data">
+                            <td>{{d.nombre}}</td>
+                            <td>{{d.apellido}}</td>
+                            <td>{{d.email}}</td>
+                            <td>{{d.fechaRegistro | date}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-12 text-center" *ngIf="data.length>0">
+            <a (click)="generarPDF()" class="btn btn-warning d-inline-block">Descargar reporte<i class="fas fa-file-download ml-1"></i></a>
+            <small class="d-block">Presione en 'Descargar reporte' para continuar con la operacion</small>
+        </div>
+    </div>
+</div>
