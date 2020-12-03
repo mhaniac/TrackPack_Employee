@@ -33,11 +33,60 @@ export class TrackingService {
     })
   }
 
+  //Getting loads to be dispatched
+
+  getDispatchLoad(){ 
+    const headers = new HttpHeaders({ 
+      token: this.loginService.getToken()
+    })
+    return this.http.get(`${URL}/tracking/dispatch`, { headers });
+  }
+
+  dispatchLoad(idCarga: number){
+    return new Promise((resolve, reject) => {
+      const headers = new HttpHeaders({
+        token: this.loginService.getToken()
+      })
+      this.http.post(`${URL}/tracking/dispatch`, { idCarga }, { headers }).subscribe((res: any) => {
+        resolve(res.message);
+      }, (err: any) => {
+        reject(err.error);
+      })
+    });
+  }
+
+  //Updating when the customer send his package
   getTrackingByLoad(id: number){
     const headers = new HttpHeaders({
       token: this.loginService.getToken()
     })
     return this.http.get(`${URL}/tracking/byQuery?idCarga=${id}`, { headers });
+  }
+
+  getPackagesByLoadId(idCarga: number){
+    return new Promise((resolve, reject) => {
+      const headers = new HttpHeaders({
+        token: this.loginService.getToken()
+      })
+      this.http.get(`${URL}/package/byLoadId?idCarga=${idCarga}`, { headers }).subscribe((res: any) => {
+        resolve(res.result);
+      }, (err: any) => {
+        console.log(err);
+      })
+    })
+  }
+
+  updateLocation(idCarga: number, lat: number, lng: number){
+    return new Promise((resolve, reject) => {
+      const headers = new HttpHeaders({
+        token: this.loginService.getToken()
+      })
+      this.http.post(`${URL}/tracking/updateLocation`, { idCarga, lat, lng }, { headers }).subscribe((res: any) => {
+        resolve(res.message);
+      }, (err: any) => {
+        reject(err.error);
+      })
+    });
   }
 
 

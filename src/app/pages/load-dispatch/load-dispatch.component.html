@@ -1,0 +1,87 @@
+<div class="vh-100">
+    <div class="container">
+        <div class="row h-100 p-4 no-gutters overflow-scroll">
+            <div class="col-12 col-md-4 animate__animated animate__fadeIn animate__faster" *ngFor="let dispatch of dispatchs">
+                <div class="card border-light mb-3 shadow-sm" style="max-width: 20rem;">
+                    <div class="card-header">ID: {{dispatch.idCarga}}</div>
+                    <div class="card-body">
+                        <h4 class="card-title">Pertenece: {{ dispatch.nombre }} </h4>
+                        <p class="lead"><strong>Destino:</strong> {{ dispatch.direccion }} | Honduras</p>
+                        <div class="options w-75 m-2 mx-auto">
+                            <a (click)="dispatchTracking(dispatch.idCarga, dispatch.nombre, dispatch.direccion)" class="btn btn-warning btn-block mx-auto"><i class="fas fa-check mx-1"></i> Despachar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#trackingGuide">
+    Launch demo modal
+  </button>
+<div class="modal fade" id="trackingGuide" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content" id="print">
+        <div class="modal-header">
+          <h5 class="modal-title">TrackPack Guia</h5>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-8 text-center">
+                      <p class="h3">Gracias por usar nuestro servicio, a continuación se adjunta la guia respectiva para su envio</p>
+                  </div>
+                  <div class="col-4">
+                      <h1>QR HERE</h1>
+                  </div>
+              </div>
+              <div class="row text-center mt-5">
+                  <div class="col-6">
+                      <h2>Cliente: {{ printGuide.name }}</h2>
+                      <h2>Tracking #{{ printGuide.idTracking }}</h2>
+                  </div>
+                  <div class="col-6">
+                      <div class="row">
+                        <div class="col-12">
+                            <p><strong>Generado: </strong>{{ printGuide.date }}</p>
+                        </div>
+                        <div class="col-12">
+                            <p><strong>Empleado: </strong>{{ printGuide.employee }}</p>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="row my-2">
+                  <div class="col-12 text-center">
+                      <p class="h4">Paquetes contenidos en la carga:</p>
+                  </div>
+                  <div class="col-12 text-center">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">ID Paquete</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Tracking Usa</th>
+                            <th scope="col">Currier</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr class="table-light" *ngFor="let package of packages">
+                            <th>{{package.idPaquete}}</th>
+                            <td>{{package.descripcion}}</td>
+                            <td>{{package.trackingUsa}}</td>
+                            <td>{{package.nombreCurrier}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+</div>

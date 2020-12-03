@@ -43,7 +43,19 @@ export class UpdateTrackingComponent implements OnInit {
       if (result.isConfirmed) {
         this.trackingService.getCurrentLocation().then((res: any) => {
           const { lat, lng } = res;
-          console.log(lat, lng);
+          this.trackingService.updateLocation(idCarga, lat, lng).then(() => {
+            Swal.fire({
+              title: 'Paquete reportado correctamente',
+              icon: 'success'
+            });
+            this.onSubmit();
+          }).catch((err) => {
+            Swal.fire({ 
+              title: 'Error al momento de reportar el paquete',
+              text: err,
+              icon: 'error'
+            })
+          })
         }).catch((error:any) => {
           Swal.fire({
             title: 'Error de localizacion',

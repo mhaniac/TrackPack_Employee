@@ -1,0 +1,5 @@
+.bg-seacrh {
+    background: linear-gradient(rgba(255, 255, 255, .9), rgba(255, 255, 255, .9)), url('../../../assets/img/delivery.jpg');
+    background-size: cover;
+    background-position: bottom;
+}

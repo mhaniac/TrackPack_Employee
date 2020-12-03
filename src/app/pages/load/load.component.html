@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-4">
             <div class="card border-primary mb-3 mx-auto shadow" style="max-width: 20rem;" [routerLink]="['/dashboard/register-tracking']">
                 <div class="card-body">
                     <h4 class="card-title">Registrar por tracking</h4>
@@ -20,7 +20,18 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-4">
+            <div class="card border-primary mb-3 mx-auto shadow" style="max-width: 20rem;" [routerLink]="['/dashboard/load-dispatch']">
+                <div class="card-body">
+                    <h4 class="card-title">Cargas a ser despachadas</h4>
+                    <p class="card-text text-justify">Se mostraran todas las cargas que han sido despachadas por los clientes.</p>
+                    <div class="icon w-100 text-right">
+                        <i class="fas fa-truck-loading text-primary"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
             <div class="card border-primary mb-3 mx-auto shadow" style="max-width: 20rem;" [routerLink]="['/dashboard/update-tracking']">
                 <div class="card-body">
                     <h4 class="card-title">Reportar ubicación de la carga</h4>

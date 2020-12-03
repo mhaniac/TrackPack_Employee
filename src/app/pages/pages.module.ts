@@ -15,10 +15,11 @@ import { CustomerComponent } from './customer/customer.component';
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { OptionsComponent } from './options/options.component';
 import { UpdateTrackingComponent } from './update-tracking/update-tracking.component';
+import { LoadDispatchComponent } from './load-dispatch/load-dispatch.component';
 
 
 @NgModule({
-  declarations: [PagesComponent, DashboardComponent, LoadComponent, RegisterComponent, ReportsComponent, RegisterTrackingComponent, CustomerComponent, OptionsComponent, UpdateTrackingComponent],
+  declarations: [PagesComponent, DashboardComponent, LoadComponent, RegisterComponent, ReportsComponent, RegisterTrackingComponent, CustomerComponent, OptionsComponent, UpdateTrackingComponent, LoadDispatchComponent],
   imports: [
     CommonModule, 
     PagesRoutingModule,
