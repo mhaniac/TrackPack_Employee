@@ -18,6 +18,8 @@
                                 <input class="form-control" id="username" type="text" [formControlName]="'username'" [class.is-invalid]="getValidUsername">
                             </div>
                             <small class="text-danger d-block" *ngIf="getValidUsernameLength">El nombre de usuario debe contener al menos 5 caracteres</small>
+                            <small class="text-danger d-block" *ngIf="getValidUsernamePattern">El nombre de usuario solo puede contener letras digitos  _  .</small>
+                            <small class="text-danger d-block" *ngIf="getValidUsernameCharacter">El nombre de usuario no puede contener 3 caracteres consecutivos del mismo tipo</small>
                         </fieldset>
                     </div>
                     <div class="form-group">

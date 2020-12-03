@@ -8,6 +8,7 @@ import { PagesComponent } from './pages.component';
 import { RegisterTrackingComponent } from './register-tracking/register-tracking.component';
 import { RegisterComponent } from './register/register.component';
 import { ReportsComponent } from './reports/reports.component';
+import { UpdateTrackingComponent } from './update-tracking/update-tracking.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: PagesComponent, canActivate: [AuthGuard],children: [
@@ -17,6 +18,7 @@ const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'reports', component: ReportsComponent },
     { path: 'customer', component: CustomerComponent },
+    { path: 'update-tracking', component: UpdateTrackingComponent }
   ] }
 ];
 

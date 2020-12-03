@@ -143,6 +143,10 @@ export class CustomerComponent implements OnInit {
     this.customerService.removeError();
   }
 
+  get validPasswd(){
+    return this.formModal.get('passwd').touched && this.formModal.get('passwd').invalid;
+  }
+
   get equalPasswd(){
     return this.formModal.get('passwd').dirty && this.formModal.get('passwd').value !== this.formModal.get('passwd2').value
   }
@@ -161,6 +165,10 @@ export class CustomerComponent implements OnInit {
 
   get minPasswd2(){
     return this.formModal.get('passwd2').touched && this.formModal.get('passwd2').errors && this.formModal.get('passwd2').errors.minlength;
+  }
+
+  get validPasswd2(){
+    return this.formModal.get('passwd2').touched && this.formModal.get('passwd2').invalid;
   }
 
 }

@@ -9,7 +9,11 @@ export class ValidatorsService {
   constructor() { }
 
   noRepeatCharacter(control: FormControl): { [s: string]: boolean }{
+    if(control.value === null){
+      return null;
+    }
     const string = control.value.toLowerCase();
+
 
     for (let i = 0; i < string.length; i++) {
         if (i >= 2) {

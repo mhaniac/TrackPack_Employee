@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { UtiliesService } from 'src/app/services/utilies.service';
+import { ValidatorsService } from 'src/app/services/validators.service';
 
 @Component({
   selector: 'app-login',
@@ -13,11 +14,11 @@ export class LoginComponent implements OnInit {
 
   fg: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private utilService: UtiliesService, public loginService: LoginService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private utilService: UtiliesService, public loginService: LoginService, private router: Router, private validatorService: ValidatorsService) { }
 
   ngOnInit(): void {
     this.fg = this.formBuilder.group({
-      username: ["", [Validators.required, Validators.minLength(5)]],
+      username: ["", [Validators.required, Validators.minLength(5), this.validatorService.noRepeatCharacter, Validators.pattern(/^[A-Za-z0-9_.ñÑ]*$/)]],
       passwd: ["", [Validators.required, Validators.minLength(8)]]
     });
     console.log(this.loginService.getToken());
@@ -46,6 +47,15 @@ export class LoginComponent implements OnInit {
 
   get getValidUsernameLength(){
     return this.fg.get('username').touched && this.fg.get('username').value.length < 5;
+  }
+
+  get getValidUsernamePattern(){
+    return this.fg.get('username').touched && this.fg.get('username').errors && this.fg.get('username').errors.pattern;
+  }
+
+  get getValidUsernameCharacter(){
+    return this.fg.get('username').touched && this.fg.get('username').errors && this.fg.get('username').errors.noRepeatCharacter;
+
   }
 
   get getValidPasswd(){

@@ -13,10 +13,12 @@ import { RegisterTrackingComponent } from './register-tracking/register-tracking
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomerComponent } from './customer/customer.component';
 import { TooltipModule } from 'ng2-tooltip-directive';
+import { OptionsComponent } from './options/options.component';
+import { UpdateTrackingComponent } from './update-tracking/update-tracking.component';
 
 
 @NgModule({
-  declarations: [PagesComponent, DashboardComponent, LoadComponent, RegisterComponent, ReportsComponent, RegisterTrackingComponent, CustomerComponent],
+  declarations: [PagesComponent, DashboardComponent, LoadComponent, RegisterComponent, ReportsComponent, RegisterTrackingComponent, CustomerComponent, OptionsComponent, UpdateTrackingComponent],
   imports: [
     CommonModule, 
     PagesRoutingModule,

@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
     this.getEmployees();
 
     this.formModal = this.formBuilder.group({
-      userLogin: ['', [Validators.required, Validators.minLength(5), Validators.pattern(/^[A-Za-z0-9ñÑ]*$/)]],
+      userLogin: ['', [Validators.required, Validators.minLength(5), Validators.pattern(/^[A-Za-z0-9_.ñÑ]*$/), this.validatorService.noRepeatCharacter]],
       nombre: ['', [Validators.required, Validators.minLength(2), Validators.pattern(/^[A-Za-z áéíóúÁÉÍÓÚñÑ]*$/), this.validatorService.noRepeatCharacter]],
       apellido: ['', [Validators.required, Validators.minLength(2), Validators.pattern(/^[A-Za-z áéíóúÁÉÍÓÚñÑ]*$/), this.validatorService.noRepeatCharacter]],
       passwd: ['', [Validators.required, Validators.minLength(8)]],
@@ -103,6 +103,7 @@ export class RegisterComponent implements OnInit {
           title: res,
           icon: 'success'
         })
+        this.resetForm()
       }).catch((err: any) => {
         this.employeeService.setError(err);
       })
@@ -120,6 +121,7 @@ export class RegisterComponent implements OnInit {
 
   resetForm(){
     this.formModal.reset();
+    this.formModal.markAsPristine();
     this.employeeService.removeError();
   }
 
@@ -142,6 +144,9 @@ export class RegisterComponent implements OnInit {
     return this.formModal.get('userLogin').touched && this.formModal.get('userLogin').errors && this.formModal.get('userLogin').errors.pattern;
   }
 
+  get invalidUsernameRepeat(){
+    return this.formModal.get('userLogin').touched && this.formModal.get('userLogin').errors && this.formModal.get('userLogin').errors.noRepeatCharacter;
+  }
 
   //Getters validations for name
 
@@ -198,6 +203,29 @@ export class RegisterComponent implements OnInit {
       return this.formModal.get('passwd').value === this.formModal.get('passwd2').value ;
     }
 
+    get invalidPasswdLength(){
+      return this.formModal.get('passwd').touched && this.formModal.get('passwd').errors && this.formModal.get('passwd').errors.minlength;
+    }
+
+    get invalidPasswd(){
+      return this.formModal.get('passwd').touched && this.formModal.get('passwd').invalid;
+    } 
+
+    get invalidPasswdRequired(){
+      return this.formModal.get('passwd').touched && this.formModal.get('passwd').errors && this.formModal.get('passwd').errors.required;
+    }
+
+    get invalidPasswd2Length(){
+      return this.formModal.get('passwd2').touched && this.formModal.get('passwd2').errors && this.formModal.get('passwd2').errors.minlength;
+    }
+
+    get invalidPasswd2(){
+      return this.formModal.get('passwd2').touched && this.formModal.get('passwd2').invalid;
+    } 
+
+    get invalidPasswd2Required(){
+      return this.formModal.get('passwd2').touched && this.formModal.get('passwd2').errors && this.formModal.get('passwd2').errors.required;
+    }
 
 
 

@@ -8,6 +8,7 @@ import { URL } from './globals';
 })
 export class TrackingService {
 
+  error = { show: false, message: '' };
 
   constructor(private http: HttpClient, private loginService: LoginService) { }
 
@@ -29,6 +30,40 @@ export class TrackingService {
       },(err:any) => {
         reject(err.error);
       })
+    })
+  }
+
+  getTrackingByLoad(id: number){
+    const headers = new HttpHeaders({
+      token: this.loginService.getToken()
+    })
+    return this.http.get(`${URL}/tracking/byQuery?idCarga=${id}`, { headers });
+  }
+
+
+  //Errors Setters and Getters
+
+  setError(error: string){
+    this.error = { show: true, message: error }
+  }
+
+  getError(){
+    return this.error;
+  }
+
+  removeError(){
+    this.error = { show: false, message: '' };
+  }
+
+
+  //Allow location
+  getCurrentLocation(){
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition((coords)=>{
+        resolve({ lat: coords.coords.latitude, lng: coords.coords.longitude });
+      }, () => {
+        reject('Debes permitir la ubicacion para completar esta operacion')
+      }, { enableHighAccuracy: true })
     })
   }
 
