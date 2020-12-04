@@ -52,7 +52,7 @@ export class UpdateTrackingComponent implements OnInit {
           }).catch((err) => {
             Swal.fire({ 
               title: 'Error al momento de reportar el paquete',
-              text: err,
+              text: err.error.error,
               icon: 'error'
             })
           })

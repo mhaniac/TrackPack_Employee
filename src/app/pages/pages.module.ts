@@ -16,6 +16,7 @@ import { TooltipModule } from 'ng2-tooltip-directive';
 import { OptionsComponent } from './options/options.component';
 import { UpdateTrackingComponent } from './update-tracking/update-tracking.component';
 import { LoadDispatchComponent } from './load-dispatch/load-dispatch.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { LoadDispatchComponent } from './load-dispatch/load-dispatch.component';
     ComponentsModule,
     FormsModule,
     ReactiveFormsModule,
-    TooltipModule
+    TooltipModule,
+    QRCodeModule
   ],
   exports: [
     PagesComponent,
