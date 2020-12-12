@@ -4,6 +4,7 @@ i {
 
 .card {
     transition: all ease .3s;
+    height: 250px;
 }
 
 .card:hover {

@@ -1,0 +1,82 @@
+<div class="container my-4" *ngIf="!bill.show">
+    <div class="row vh-100 align-items-center justify-content-center">
+        <div class="col-4 mx-auto">
+            <button class="btn btn-primary btn-block" (click)="billModal()">Ingresar tracking</button>
+        </div>
+    </div>
+</div>
+<div class="container" *ngIf="bill.show">
+    <div class="row">
+        <div class="col-6 mx-auto">
+            <label for="weight" class="form-label">Ingrese el peso (lbs)</label>
+            <input type="number" class="form-control" id="weight" placeholder="name@example.com" (change)="calcTotal()" [(ngModel)]="weight" min="1" max="100" value="1">
+        </div>
+    </div>
+</div>
+<div class="container mt-4 p-4" *ngIf="bill.show" id="print">
+    <div class="row justify-content-center">
+        <div class="col-4 text-center">
+            <h1>TRACKPACK</h1>
+        </div>
+        <div class="col-4 text-center">
+            <div class="text-center">
+                <p><strong>Tracking:</strong> {{ bill.idTracking }}</p>
+            </div>
+        </div>
+        <div class="col-4 text-center">
+            <p><strong>Generado por:</strong> {{ bill.employee }}</p>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12 text-center">
+            <h4>Generado: {{ bill.date }}</h4>
+        </div>
+        <div class="col-12 text-center">
+            <h4>Cliente: {{ bill.customer }}</h4>
+        </div>
+        <div class="col-12 text-center">
+            <h3>Destino: {{ bill.address }}</h3>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12 text-center">
+            <h5>Contenido de la carga</h5>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Tracking USA</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Courier</th>
+                    <th scope="col">Recibido</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let package of packages">
+                    <td>{{ package.trackingUsa }}</td>
+                    <td>{{ package.descripcion }}</td>
+                    <td>{{ package.nombreCurrier }}</td>
+                    <td>{{ package.datetimeRecibido | date}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row mt-4">
+        <div class="col-6 text-center">
+            <h3>Peso: {{ weight }} lbs</h3>
+        </div>
+        <div class="col-6 text-center">
+            <h3>Total: {{ total }} lps</h3>
+        </div>
+    </div>
+</div>
+<div class="container mt-4" *ngIf="bill.show">
+    <div class="row">
+        <div class="col-4 mx-auto">
+            <button class="btn btn-warning btn-block" (click)="downloadBill()"><i class="fas fa-download mx-1"></i>Descargar</button>
+        </div>
+        <div class="col-4 mx-auto my-2">
+            <button class="btn btn-primary btn-block" (click)="resetValues()"><i class="fas fa-plus-square mx-1"></i> Generar otra factura </button>
+        </div>
+    </div>
+</div>

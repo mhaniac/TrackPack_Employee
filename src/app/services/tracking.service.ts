@@ -71,7 +71,7 @@ export class TrackingService {
       this.http.get(`${URL}/package/byLoadId?idCarga=${idCarga}`, { headers }).subscribe((res: any) => {
         resolve(res.result);
       }, (err: any) => {
-        console.log(err);
+        
       })
     })
   }
@@ -114,6 +114,20 @@ export class TrackingService {
         reject('Debes permitir la ubicacion para completar esta operacion')
       }, { enableHighAccuracy: true })
     })
+  }
+
+  generateBill(idCarga: number){
+    return new Promise((resolve, reject) => {
+      const headers = new HttpHeaders({
+        token: this.loginService.getToken()
+      })
+      this.http.get(`${URL}/tracking/bill?idCarga=${idCarga}`, { headers }).subscribe((res: any) => {
+        resolve(res.results);
+      }, (err: any) => {
+        console.log(err);
+        reject(err.error.error);
+      });
+    });
   }
 
 }

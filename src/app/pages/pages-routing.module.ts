@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../guards/auth.guard';
+import { BillComponent } from './bill/bill.component';
 import { CustomerComponent } from './customer/customer.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoadDispatchComponent } from './load-dispatch/load-dispatch.component';
@@ -20,7 +21,8 @@ const routes: Routes = [
     { path: 'reports', component: ReportsComponent },
     { path: 'customer', component: CustomerComponent },
     { path: 'update-tracking', component: UpdateTrackingComponent },
-    { path: 'load-dispatch', component: LoadDispatchComponent }
+    { path: 'load-dispatch', component: LoadDispatchComponent },
+    { path: 'bill', component: BillComponent }
   ] }
 ];
 
