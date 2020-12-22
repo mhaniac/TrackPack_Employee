@@ -7,10 +7,10 @@
             <form>
                 <div class="form-group">
                     <select class="custom-select" (change)="getData(select.value)" #select>
-                      <option selected="" disabled>Seleccione sobre que hacer el reporte</option>
+                      <option selected="" disabled>Seleccione el reporte</option>
                       <option value="customer">Clientes</option>
                     </select>
-                  </div>
+                </div>
             </form>
         </div>
         <div class="col-12  h-75 overflow-auto" *ngIf="data.length>0">

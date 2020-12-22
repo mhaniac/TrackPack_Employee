@@ -26,7 +26,7 @@ export class BillComponent implements OnInit {
 
   billModal(){
     Swal.fire({
-      title: 'Ingrese el numero de tracking',
+      title: 'Ingrese el número de tracking',
       input: 'text',
       showCancelButton: true,
       cancelButtonText: 'Cancelar',

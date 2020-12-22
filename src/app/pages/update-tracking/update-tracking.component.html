@@ -4,8 +4,8 @@
             <form [formGroup]="formGroup" autocomplete="off">
                 <fieldset>
                     <label class="control-label d-block h3" for="tracking">Ingrese el ID del paquete</label>
-                    <small class="d-block text-danger" *ngIf="invalidTrackingPatter">El numero de tracking no debe contener caracteres especiales</small>
-                    <small class="d-block text-danger" *ngIf="invalidTrackingRequired">El numero de tracking es requerido</small>
+                    <small class="d-block text-danger" *ngIf="invalidTrackingPatter">El número de tracking no debe contener caracteres especiales</small>
+                    <small class="d-block text-danger" *ngIf="invalidTrackingRequired">El número de tracking es requerido</small>
                     <input class="form-control" id="tracking" type="text" [formControlName]="'idCarga'" (keyup)="onSubmit()" [class.is-invalid]="invalidTracking">
                 </fieldset>
             </form>
@@ -14,7 +14,10 @@
 
     <div class="container">
         <div class="row h-75 p-4 no-gutters overflow-scroll">
-            <div class="col-12 animate__animated animate__fadeIn" *ngIf="trackings.length === 0 && formGroup.get('idCarga').value.length > 1">
+            <div class="col-6 mx-auto" *ngIf="trackings.length === 0 && formGroup.get('idCarga').value.length === 0">
+                <app-alert message='Aqui se visualizaran todos los trackings que coincidan con los datos ingresados' type='alert-info'></app-alert>
+            </div>
+            <div class="col-6 mx-auto animate__animated animate__fadeIn" *ngIf="trackings.length === 0 && formGroup.get('idCarga').value.length > 1">
                 <app-alert message="ID no coincide, por favor verifique que este bien escrito" type="alert-warning"></app-alert>
             </div>
             <div class="col-12 col-md-4 animate__animated animate__fadeIn animate__faster" *ngFor="let tracking of trackings">

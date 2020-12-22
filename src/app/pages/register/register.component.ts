@@ -42,8 +42,9 @@ export class RegisterComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#593196',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminar'
-    }).then((result) => {
+      confirmButtonText: 'Si, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => { 
       if (result.isConfirmed) {
         Swal.queue([{
           title: 'Ingresa tu contraseña para continuar',
@@ -56,6 +57,7 @@ export class RegisterComponent implements OnInit {
           showCancelButton: true,
           cancelButtonColor: '#d33',
           showLoaderOnConfirm: true,
+          cancelButtonText: 'Cancelar',
           preConfirm: (passwd) => {
               return new Promise((resolve, reject) => {
                 const headers = new HttpHeaders({ 
@@ -74,7 +76,8 @@ export class RegisterComponent implements OnInit {
                     Swal.fire({
                       title: 'Error',
                       text: err2.error.error,
-                      icon: 'error'
+                      icon: 'error',
+            
                     });
                     reject();
                   })

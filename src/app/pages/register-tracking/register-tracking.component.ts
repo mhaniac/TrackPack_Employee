@@ -42,7 +42,8 @@ export class RegisterTrackingComponent implements OnInit {
       showCancelButton: true,
       confirmButtonColor: '#593196',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, registrar'
+      confirmButtonText: 'Si, registrar',
+      cancelButtonText: 'Cancelar'
     }).then((result) => {
       if (result.isConfirmed) {
         this.trackingService.registerPackage(id).then(()=>{
